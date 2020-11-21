@@ -9,5 +9,29 @@
 </head>
 <body>
   [ CONTENT ]
+
+  
+  <form id="converter-input" autocomplete="on">
+    <label for="usd-input">
+      Input amount in <abbr title="United States Dollars"> USD</abbr>:
+    </label>
+    <input type="text" id="usd-input">
+    <br />
+    <label for="currency-select">
+      Select currency to receive: 
+    </label>
+    <input list="currencies" name="currency" id="currency-select">
+      <datalist id="currencies">
+        <option value="1" id=""></option>
+        <option value="2" id=""></option>
+        <option value="3" id=""></option>
+        <option value="4" id=""></option>
+        <option value="5" id=""></option>
+      </datalist>
+    <br />
+    <button type="submit">
+      Convert
+    </button>
+  </form>
 </body>
 </html>

@@ -2,3 +2,5 @@ node_modules/
 .DS_Store
 dist/
 .env
+README.md
+assets/js/api-object.js
