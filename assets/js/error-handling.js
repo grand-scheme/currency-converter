@@ -10,22 +10,24 @@ export default class Errors {
     } else if 
     (dollars !== "Australian Dollars" && dollars !== "Bahamian Dollars" && dollars !== "Canadian Dollars" && dollars !== "Hong Kong Dollars" && dollars !== "New Zealand Dollars") 
     {
-      $("#error-output-dollars").text(`This currency is not supported, or does not exist.`);
+      $("#error-output-dollars").text("This currency is not supported, or does not exist.");
       $("#content-error").show();
     } else {
+      $("#error-output-dollars").text("");
       return true;
     }
   }
 
   static getMoneyErrors(usd) {
     if (usd === "") {
-      $("#error-output-dollars").text("You need to input an amount of money to convert.");
+      $("#error-output-usd").text("You need to input an amount of money to convert.");
       $("#content-error").show();
     }
     else if (isNaN(usd)) {
       $("#error-output-usd").text("Did you input your currency in numbers?");
       $("#content-error").show();
     } else {
+      $("#error-output-usd").text("");
       return true;
     }
   }
@@ -48,6 +50,7 @@ export default class Errors {
         $("#error-output").text("The error was not defined.");
       }
     } else if (api.result === "success") {
+      $("#error-output").text("");
       return true;
     }
     else {
