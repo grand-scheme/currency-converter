@@ -1,22 +1,26 @@
 export default class Response {
-  static getElements(response, searchInput) {
-    let currencyObject = response.conversion_rates;
+  static getCurrency(searchInput) {
     let result = "";
-
     if (searchInput === "Australian Dollars") {
-      result = currencyObject.AUD;
+      result = "AUD";
     } else if (searchInput === "Bahamian Dollars") {
-      result = currencyObject.BSD;
+      result = "BSD";
     } else if (searchInput === "Canadian Dollars") {
-      result = currencyObject.CAD;
+      result = "CAD";
     } else if (searchInput === "Hong Kong Dollars") {
-      result = currencyObject.HKD;
+      result = "HKD";
     } else if (searchInput === "New Zealand Dollars") {
-      result = currencyObject.NZD;
+      result = "NZD";
     } else {
-      result = ("unsupported currency");
+      result = "XXX";
     }
     return result;
+  }
+  
+  static getElements(response, searchInput) {
+    let currencyObject = response.conversion_rates[searchInput];
+    console.log(currencyObject);
+    return currencyObject;
   }
   static math(a, b) {
     if (isNaN(a)) {
