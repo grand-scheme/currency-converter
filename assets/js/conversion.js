@@ -14,8 +14,17 @@ export default class Response {
     } else if (searchInput === "New Zealand Dollars") {
       result = currencyObject.NZD;
     } else {
-      console.log("different currency");
+      result = ("unsupported currency");
     }
     return result;
+  }
+  static math(a, b) {
+    if (isNaN(a)) {
+      return a;
+    } else if (isNaN(b)) {
+      return "Did you input your currency in numbers?";
+    } else {
+      return (a * b).toFixed(2);
+    }
   }
 }
