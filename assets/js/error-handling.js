@@ -18,17 +18,18 @@ export default class Errors {
     if (dollars === "") {
       $("#error-output-dollars").text("You need to select a currency.");
       $("#content-error").show();
-    } else if 
-      (dollars !== "AUD"
-      && dollars !== "BSD"
-      && dollars !== "CAD"
-      && dollars !== "HKD"
-      && dollars !== "NZD" 
-      && dollars !== "AUSTRALIAN DOLLARS" 
-      && dollars !== "BAHAMIAN DOLLARS" 
-      && dollars !== "CANADIAN DOLLARS" 
-      && dollars !== "HONG KONG DOLLARS" 
-      && dollars !== "NEW ZEALAND DOLLARS") {
+    } else if (
+        dollars !== "AUD"
+        && dollars !== "BSD"
+        && dollars !== "CAD"
+        && dollars !== "HKD"
+        && dollars !== "NZD" 
+        && dollars !== "AUSTRALIAN DOLLARS" 
+        && dollars !== "BAHAMIAN DOLLARS" 
+        && dollars !== "CANADIAN DOLLARS" 
+        && dollars !== "HONG KONG DOLLARS" 
+        && dollars !== "NEW ZEALAND DOLLARS"
+      ) {
       $("#error-output-dollars").text("This currency is not supported, or does not exist.");
       $("#content-error").show();
     } else {
