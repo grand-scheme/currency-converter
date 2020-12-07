@@ -5,9 +5,6 @@ import Response from './../assets/js/conversion.js';
 import Errors from '../assets/js/error-handling.js';
 
 function clearFields() {
-  $("#currency-select").val("");
-  $("#error-output-dollars").val("");
-  $("#error-output-usd").val("");
   $("#error-output").val("");
   $("#content-success").hide();
   $("#content-error").hide();
@@ -42,11 +39,12 @@ function makeCall(userUSD, search) {
 $(document).ready(function() {
   $("#converter-input").submit(function(e) {
     e.preventDefault();
-    let userUSD = parseInt($("#usd-input").val());
+    let userUSD = parseFloat($("#usd-input").val());
     let search = $("#currency-select").val();
     clearFields();
     Errors.getDollarErrors(search);
     Errors.getMoneyErrors(userUSD);
+    console.log(userUSD);
     if (Errors.getDollarErrors(search) === true && Errors.getMoneyErrors(userUSD) == true) {
       makeCall(userUSD, search);
     } else {
