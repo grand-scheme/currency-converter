@@ -16,7 +16,12 @@ function buildConversion(userCurrency, userUSD, apiOutput) {
   let currencyAfterConversion = Response.math(selectedExchangeRate, userUSD);
   $("#usd-output").text(userUSD.toFixed(2));
   $("#conversion-output").text(currencyAfterConversion);
-  $("#currency").text(userCurrency);
+  let checkDollars = userCurrency.toUpperCase()
+  if (checkDollars === "AUD" || checkDollars === "BSD" || checkDollars === "CAD" || checkDollars === "HKD" || checkDollars === "NZD") {
+    $("#currency").text(checkDollars);
+  } else {  
+    $("#currency").text(userCurrency);
+  }
   $("#content-success").show();
 }
 
