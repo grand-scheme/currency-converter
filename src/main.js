@@ -8,6 +8,7 @@ $(document).ready(function() {
     e.preventDefault();
     let userUSD = parseInt($("#usd-input").val());
     let search = $("#currency-select").val();
+    $("#currency-select").val("");
     
     let request = new XMLHttpRequest();
     const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
@@ -18,24 +19,27 @@ $(document).ready(function() {
         if (apiResponse.result === "success") {
           let outputQ = Response.getElements(apiResponse, search);
           let outputZ = Response.math(outputQ, userUSD);
-          console.log(outputZ);
+          $("#usd-output").text(userUSD.toFixed(2));
+          $("#conversion-output").text(outputZ);
+          $("#currency").text(search);
+
         
         } else if (apiResponse["error-type"] == "unsupported-code") {
-          console.log("This currency code is not supported.");
+          $("#error-output").text("This currency code is not supported.");
         } else if (apiResponse["error-type"] === "base-code-only-on-pro") {
-          console.log("The specified currency code is not available through this application.");
+          $("#error-output").text("The specified currency code is not available through this application.");
         } else if (apiResponse["error-type"] === "malformed-request") {
-          console.log("Sorry! There was an error in forming this request.");
+          $("#error-output").text("Sorry! There was an error in forming this request.");
         } else if (apiResponse["error-type"] === "invalid-key") {
-          console.log("The API key is invalid or expired. Sorry!");
+          $("#error-output").text("The API key is invalid or expired. Sorry!");
         } else if (apiResponse["error-type"] === "quota-reached") {
-          console.log("Quota of queries reached. Sorry! Please try again later.");
+          $("#error-output").text("Quota of queries reached. Sorry! Please try again later.");
         } else if (apiResponse["error-type"] === "not-available-on-plan") {
-          console.log("This request not valid via this application.");
+          $("#error-output").text("This request not valid via this application.");
         } else {
-          console.log("Something broke along the way.");
-          console.log(apiResponse["error-type"]);
-          console.log(apiResponse.result);
+          $("#error-output").text("Something broke along the way.");
+          $("#error-output").text(apiResponse["error-type"]);
+          $("#error-output").text(apiResponse.result);
         }
       } else {
         return "error";
