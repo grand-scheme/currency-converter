@@ -40,6 +40,7 @@ export default class Errors {
   
   static getApiErrors(api) {
     if (api.result === "error") {
+      $("#content-error").show();
       if (api["error-type"] === "unsupported-code") {
         $("#error-output").text("This currency code is not supported.");
       } else if (api["error-type"] === "base-code-only-on-pro") {
@@ -60,8 +61,9 @@ export default class Errors {
       return true;
     }
     else {
+      $("#content-error").show();
       $("#error-output").text("Something broke along the way.");
     }
-    $("#content-error").show();
+    
   }
 }
