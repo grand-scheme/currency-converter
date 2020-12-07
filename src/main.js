@@ -10,17 +10,17 @@ function clearFields() {
   $("#content-error").hide();
 }
 
-function buildConversion(search, userUSD, apiOutput) {
-  let currencyChosen = Response.getCurrency(search);
-  let outputQ = Response.getElements(apiOutput, currencyChosen);
-  let outputZ = Response.math(outputQ, userUSD);
+function buildConversion(userCurrency, userUSD, apiOutput) {
+  let currencyChosen = Response.getCurrency(userCurrency);
+  let selectedExchangeRate = Response.getElements(apiOutput, currencyChosen);
+  let currencyAfterConversion = Response.math(selectedExchangeRate, userUSD);
   $("#usd-output").text(userUSD.toFixed(2));
-  $("#conversion-output").text(outputZ);
-  $("#currency").text(search);
+  $("#conversion-output").text(currencyAfterConversion);
+  $("#currency").text(userCurrency);
   $("#content-success").show();
 }
 
-function makeCall(userUSD, search) {
+function makeCall(userUSD, userCurrency) {
   let request = new XMLHttpRequest();
   const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
   request.onreadystatechange = function() {
@@ -28,7 +28,7 @@ function makeCall(userUSD, search) {
       let apiOutput = JSON.parse(this.responseText);
       Errors.getApiErrors(apiOutput);
       if (Errors.getApiErrors(apiOutput) === true) {
-        buildConversion(search, userUSD, apiOutput);
+        buildConversion(userCurrency, userUSD, apiOutput);
       }
     }
   };
@@ -40,15 +40,13 @@ $(document).ready(function() {
   $("#converter-input").submit(function(e) {
     e.preventDefault();
     let userUSD = parseFloat($("#usd-input").val());
-    let search = $("#currency-select").val();
+    let userCurrency = $("#currency-select").val();
+    console.log(userCurrency);
     clearFields();
-    Errors.getDollarErrors(search);
     Errors.getMoneyErrors(userUSD);
-    console.log(userUSD);
-    if (Errors.getDollarErrors(search) === true && Errors.getMoneyErrors(userUSD) == true) {
-      makeCall(userUSD, search);
-    } else {
-      console.log("failed error check");
+    Errors.getDollarErrors(userCurrency);
+    if (Errors.getDollarErrors(userCurrency) === true && Errors.getMoneyErrors(userUSD) == true) {
+      makeCall(userUSD, userCurrency);
     }
   });
 });
