@@ -4,3 +4,4 @@ dist/
 .env
 README.md
 assets/js/api-object.js
+assets/js/api-call.js
