@@ -6,7 +6,7 @@ import Response from './../assets/js/conversion.js';
 $(document).ready(function() {
   $("#converter-input").submit(function(e) {
     e.preventDefault();
-    // let userUSD = parseInt($("#usd-input").val());
+    let userUSD = parseInt($("#usd-input").val());
     let search = $("#currency-select").val();
 
     // api call
@@ -17,7 +17,8 @@ $(document).ready(function() {
       if (this.readyState === 4 && this.status === 200) {
         const apiResponse = JSON.parse(this.responseText);
         let outputQ = Response.getElements(apiResponse, search);
-        console.log(outputQ);        
+        let outputZ = Response.math(outputQ, userUSD);
+        alert(outputZ);
       } else {
         return "error";
       }
@@ -28,6 +29,3 @@ $(document).ready(function() {
   });
 });
 
-// function math(a, b) {
-//   return (a * b).toFixed(2);
-// }
