@@ -1,9 +1,12 @@
+// BUSINESS LOGIC: FUNCTION IMPORTS
 import $ from 'jquery';
 import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/css/styles.css';
-import Response from './../assets/js/conversion.js';
+import GetConversion from './../assets/js/conversion.js';
 import Errors from '../assets/js/error-handling.js';
 
+// BUSINESS LOGIC: ASSEMBLY FUNCTIONS
 function clearFields() {
   $("#error-output").val("");
   $("#content-success").hide();
@@ -11,20 +14,19 @@ function clearFields() {
 }
 
 function buildConversion(userCurrency, userUSD, apiOutput) {
-  let currencyChosen = Response.getCurrency(userCurrency);
-  let selectedExchangeRate = Response.getElements(apiOutput, currencyChosen);
-  let currencyAfterConversion = Response.math(selectedExchangeRate, userUSD);
+  let currencyChosen = GetConversion.getCurrency(userCurrency);
+  let selectedExchangeRate = GetConversion.getElements(apiOutput, currencyChosen);
+  let currencyAfterConversion = GetConversion.math(selectedExchangeRate, userUSD);
   $("#usd-output").text(userUSD.toFixed(2));
   $("#conversion-output").text(currencyAfterConversion);
-  let checkDollars = userCurrency.toUpperCase()
+  let checkDollars = userCurrency.toUpperCase();
   if (checkDollars === "AUD" || checkDollars === "BSD" || checkDollars === "CAD" || checkDollars === "HKD" || checkDollars === "NZD") {
     $("#currency").text(checkDollars);
-  } else {  
-    $("#currency").text(userCurrency);
-  }
+  } else { $("#currency").text(userCurrency); }
   $("#content-success").show();
 }
 
+// BUSINESS LOGIC: API CALL
 function makeCall(userUSD, userCurrency) {
   let request = new XMLHttpRequest();
   const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
@@ -41,13 +43,15 @@ function makeCall(userUSD, userCurrency) {
   request.send();
 }
 
+// User Interface
 $(document).ready(function() {
   $("#converter-input").submit(function(e) {
     e.preventDefault();
     let userUSD = parseFloat($("#usd-input").val());
     let userCurrency = $("#currency-select").val();
-    console.log(userCurrency);
+    
     clearFields();
+    
     Errors.getMoneyErrors(userUSD);
     Errors.getDollarErrors(userCurrency);
     if (Errors.getDollarErrors(userCurrency) === true && Errors.getMoneyErrors(userUSD) == true) {
