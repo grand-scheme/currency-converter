@@ -4,47 +4,67 @@
   <meta charset="UTF-8"></meta>
   <meta name="robots" content="noindex"></meta>
   <title>
-    [ TITLE ]
+    Dollars to Dollars
   </title>
 </head>
 <body>
-  [ CONTENT ]
-
-  
-  <form id="converter-input" autocomplete="on">
-    <label for="usd-input">
-      Input amount in <abbr title="United States Dollars"> USD</abbr>:
-    </label>
-    <input type="text" id="usd-input">
-    <br />
-    <label for="currency-select">
-      Select currency to receive: 
-    </label>
-    <input list="currencies" name="currency" id="currency-select">
-      <datalist id="currencies">
-        <option value="Australian Dollars" id="AUD"></option>
-        <option value="Bahamian Dollars" id="BSD"></option>
-        <option value="Canadian Dollars" id="CAD"></option>
-        <option value="Hong Kong Dollars" id="HKD"></option>
-        <option value="New Zealand Dollars" id="NZD"></option>
-      </datalist>
-    <br />
-    <button type="submit">
-      Convert
-    </button>
-    <button type="reset">
-      Clear
-    </button>
-  </form>
-  <div id="content-success">
-    You have started with $<span id="usd-output"></span> United States Dollars. <br />
-    After conversion, you now have $<span id="conversion-output"></span> <span id="currency"></span>.
-  </div>
-  <div id="content-error">
-    Sorry! There was an issue with your request. <br />
-    The error(s): <span id="error-output-usd"></span>
-    <span id="error-output-dollars"></span>
-    <span id="error-output"></span>
+  <div class="content">
+    <h1>
+      Dollars to Dollars
+    </h1>
+    <p>
+      Welcome to the only currency converter that deals <em>only</em> in dollars. Australian dollars? Canadian dollars? Dollars of the Bahamas? You got it!
+    </p>
+    <p>
+      At this time, you may only begin your currency conversion starting from US Dollars. Just insert the amount you're starting with, and select the type of dollars you would like to receive. To see your list of available currencies, just type "<strong>dollars</strong>" into the dollar field.
+    </p>
+    <p>
+      You know what no longer looks like a word? Dollar &#128578;&#xfe0e;
+    </p>
+    <form id="converter-input" autocomplete="on">
+      <div class="form-group row">
+        <div class="col-lg-5">
+          <label for="usd-input">
+            Input amount in <abbr title="United States Dollars"> USD</abbr>:
+          </label><br/>
+          <input type="text" id="usd-input" placeholder="$$$">
+        </div>
+        <div class="col-lg-5">        
+          <label for="currency-select">
+            Select currency to receive: 
+          </label><br/>
+          <input list="currencies" name="currency" id="currency-select" placeholder="Dollars">
+          <datalist id="currencies">
+            <option value="Australian Dollars" id="AUD"></option>
+            <option value="Bahamian Dollars" id="BSD"></option>
+            <option value="Canadian Dollars" id="CAD"></option>
+            <option value="Hong Kong Dollars" id="HKD"></option>
+            <option value="New Zealand Dollars" id="NZD"></option>
+          </datalist>
+        </div>
+        <div class="col-lg-2" id="buttons"><br/>
+          <button type="submit" class="btn btn-dark">
+            Convert
+          </button>
+          <button type="reset" class="btn btn-outline-dark">
+            Clear
+          </button>
+        </div>
+      </div>
+    </form>
+    <div id="content-success">
+      You have started with $<span id="usd-output"></span> United States Dollars. <br />
+      After conversion, you will have $<span id="conversion-output"></span> <span id="currency"></span>.
+    </div>
+    <div id="content-error">
+      Sorry! There was an issue with your request. <br />
+      The error(s): 
+      <ul>
+        <span id="error-output-usd"></span>
+        <span id="error-output-dollars"></span>
+        <span id="error-output"></span>
+      </ul>
+    </div>
   </div>
 </body>
 </html>
