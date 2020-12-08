@@ -1,11 +1,9 @@
-_This project is not currently in presentation format. Please come back later._
-
 ## _[ CURRENCY CONVERTER ]_  
 
 ### _A calculator to convert US Dollars into selected other world currencies._
 ### _November 20th, 2020_  
 
-#### DESCRIPTION
+#### Description:
 
 This site uses jQuery and JavaScript objects, as well as an API call, in order to take a user-submitted amount of currency and convert it to a different world currency, based on current market rates.
 
@@ -25,7 +23,65 @@ As referenced from the [Epicodus](https://epicodus.com) program's curriculum:
 
 #### Project Specs:  
 
-After refactoring, all tests can be found in the [__tests__ folder](https://github.com/grand-scheme/currency-converter/tree/main/__tests__). 
+##### conversion.js
+**Describe:** = getCurrency() \
+**Test:** Converts readable UI description of currency and converts it into its ISO currency code, for use in targeting the corresponding API object key. \
+**Code:** ```javascript
+let dollars = $(" user input of currency. ")
+if (dollars === "{Full name of currency #1}" || dollars === "{ISO code of currency #1}" {
+  result = "{ISO code of currency #1}";
+} else if (dollars === "{currency #2}") { 
+  result = "{ISO code of currency #2}";
+} else if { [...] }
+return result;``` \
+**Expect:** Country currency and corresponding ISO code (Australian Dollar vs AUD) will be paired together; whichever currency matches the user input will have only its ISO returned as a value.
+
+**Describe:** = math(exchangeRate, USD)\
+**Test:** Multiplies user-input US Dollars by the targeted exchange rate to receive converted currency value.\
+**Code:** ```javascript
+(exchangeRate * USD).toFixed(2);```\
+**Expect:** Output number should be limited to two decimal places to avoid infinite fragmentation.
+
+##### error-handling.js
+**Describe:** = getMoneyErrors(USD)\
+**Test:** Ensure input value is a number, let user know how to correct their error.\
+**Code:** ```javascript
+if (isNaN(usd)) {
+$("# Error Output Field").text( "Did you input your currency in numbers?") }
+else {
+return true;
+}```\
+**Expect:** Set output for user to see if error; set flag on backend to verify input has passed this test.
+
+**Describe:** = getDollarErrors(input)\
+**Test:** Verify that user-chosen currency endpoint is within the scope of this project.\
+**Code:** ```javascript
+if (input !== {ISO code of currency #1} && !== {name of currency #2} && [...]) {
+$("# Error Output Field").text( "That currency is not supported by this program, or is not a currency. ") 
+} else {
+  return true;
+}```\
+**Expect:** Set output for user to see if error; set flag on backend to verify input has passed this test.
+
+**Describe:** = getApiErrors(input)\
+**Test:** Check status in the returned API object and output the correlating error message, if applicable.\
+**Code:** ```javascript
+if (input.result === "error") {
+if (input["error-type"] === "unsupported-code") {
+$("# Error Output Field").text("This currency is not supported");
+} [...]
+else if (input.result === "success") {
+  return true;
+}```\
+**Expect:** Set output for user to see if error; set flag on backend to verify API object has passed this test.
+
+##### main.js
+**Describe:** makeCall();\
+**Test:** Only makes API call if user input is formatted correctly.\
+**Code:** if (${"Error Test 1"} === true && ${"Error Test 2"} === true) {
+  makeCall();
+}```\
+**Expect:** If both "passed error tests" are set to "true" (true as in passing), the API call is made. 
 
 ------------------------------
 
