@@ -1,3 +1,28 @@
+body {
+  background-color: #dfd;
+}
+
+h1 {
+  margin-top: 2rem;
+}
+
+.content {
+  max-width: 90%;
+  margin: auto;
+}
+
+#converter-input {
+  max-width: 90%;
+  margin: auto;
+}
+
+#buttons {
+  text-align:right;
+}
+
 #content-success, #content-error {
   display: none;
+  max-width: 80%;
+  margin: auto;
 }
+
