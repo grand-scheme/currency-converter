@@ -5,10 +5,10 @@ import '../css/styles.css';
 export default class Errors {
   static getMoneyErrors(usd) {
     if (isNaN(usd)) {
-      $("#error-output-usd").text("Did you input your currency in numbers?");
+      $("#error-output-usd").html("<li>Did you input your currency in numbers?</li>");
       $("#content-error").show();
     } else {
-      $("#error-output-usd").text("");
+      $("#error-output-usd").html("");
       return true;
     }
   }
@@ -16,10 +16,10 @@ export default class Errors {
   static getDollarErrors(inputDollars) {
     let dollars = inputDollars.toUpperCase();
     if (dollars === "") {
-      $("#error-output-dollars").text("You need to select a currency.");
+      $("#error-output-dollars").html("<li>You need to select a currency.</li>");
       $("#content-error").show();
     } else if (
-        dollars !== "AUD"
+      dollars !== "AUD"
         && dollars !== "BSD"
         && dollars !== "CAD"
         && dollars !== "HKD"
@@ -29,11 +29,11 @@ export default class Errors {
         && dollars !== "CANADIAN DOLLARS" 
         && dollars !== "HONG KONG DOLLARS" 
         && dollars !== "NEW ZEALAND DOLLARS"
-      ) {
-      $("#error-output-dollars").text("This currency is not supported, or does not exist.");
+    ) {
+      $("#error-output-dollars").html("<li>This currency is not supported, or does not exist.</li>");
       $("#content-error").show();
     } else {
-      $("#error-output-dollars").text("");
+      $("#error-output-dollars").html("");
       return true;
     }
   }
@@ -42,19 +42,19 @@ export default class Errors {
     if (api.result === "error") {
       $("#content-error").show();
       if (api["error-type"] === "unsupported-code") {
-        $("#error-output").text("This currency code is not supported.");
+        $("#error-output").html("<li>This currency code is not supported.");
       } else if (api["error-type"] === "base-code-only-on-pro") {
-        $("#error-output").text("The specified currency code is not available through this application.");
+        $("#error-output").html("<li>The specified currency code is not available through this application.</li>");
       } else if (api["error-type"] === "malformed-request") {
-        $("#error-output").text("Sorry! There was an error in forming this request.");
+        $("#error-output").html("<li>Sorry! There was an error in forming this request.</li>");
       } else if (api["error-type"] === "invalid-key") {
-        $("#error-output").text("The API key is invalid or expired. Sorry!");
+        $("#error-output").html("<li>The API key is invalid or expired. Sorry!</li>");
       } else if (api["error-type"] === "quota-reached") {
-        $("#error-output").text("Quota of queries reached. Sorry! Please try again later.");
+        $("#error-output").html("<li>Quota of queries reached. Sorry! Please try again later.</li>");
       } else if (api["error-type"] === "not-available-on-plan") {
-        $("#error-output").text("This request not valid via this application.");
+        $("#error-output").html("<li>This request not valid via this application.</li>");
       } else {
-        $("#error-output").text("The error was not defined.");
+        $("#error-output").html("<li>The error was not defined.</li>");
       }
     } else if (api.result === "success") {
       $("#error-output").text("");
@@ -62,7 +62,7 @@ export default class Errors {
     }
     else {
       $("#content-error").show();
-      $("#error-output").text("Something broke along the way.");
+      $("#error-output").html("<li>Something broke along the way.</li>");
     }
     
   }
