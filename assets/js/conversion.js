@@ -1,7 +1,7 @@
-export default class Response {
+export default class GetConversion {
   static getCurrency(userCurrency) {
     let result = "";
-    let dollars = userCurrency.toUpperCase()
+    let dollars = userCurrency.toUpperCase();
     if (dollars === "AUSTRALIAN DOLLARS" || dollars === "AUD") {
       result = "AUD";
     } else if (dollars === "BAHAMIAN DOLLARS" || dollars === "BSD") {
@@ -20,7 +20,6 @@ export default class Response {
 
   static getElements(response, userCurrency) {
     let currencyObject = response.conversion_rates[userCurrency];
-    console.log(currencyObject);
     return currencyObject;
   }
   static math(selectedExchangeRate, userUSD) {
