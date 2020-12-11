@@ -1,6 +1,4 @@
 import $ from 'jquery';
-import 'bootstrap';
-import '../css/styles.css';
 
 export default class Errors {
   static noMoneyErrors(usd) {

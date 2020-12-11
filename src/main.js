@@ -2,9 +2,9 @@
 import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../assets/css/styles.css';
-import Errors from '../assets/js/error-handling.js';
-import CallService from '../assets/js/call-service.js';
+import './assets/css/styles.css';
+import Errors from './assets/js/error-handling.js';
+import CallService from './assets/js/call-service.js';
 
 function clearFields() {
   $("#error-output").val("");
