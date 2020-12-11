@@ -3,7 +3,7 @@ import 'bootstrap';
 import '../css/styles.css';
 
 export default class Errors {
-  static getMoneyErrors(usd) {
+  static noMoneyErrors(usd) {
     if (isNaN(usd)) {
       $("#error-output-usd").html("<li>Did you input your currency in numbers?</li>");
       $("#content-error").show();
@@ -13,7 +13,7 @@ export default class Errors {
     }
   }
   
-  static getDollarErrors(inputDollars) {
+  static noDollarErrors(inputDollars) {
     let dollars = inputDollars.toUpperCase();
     if (dollars === "") {
       $("#error-output-dollars").html("<li>You need to select a currency.</li>");
@@ -38,7 +38,7 @@ export default class Errors {
     }
   }
   
-  static getApiErrors(api) {
+  static noApiErrors(api) {
     if (api.result === "error") {
       $("#content-error").show();
       if (api["error-type"] === "unsupported-code") {

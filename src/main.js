@@ -33,8 +33,7 @@ function makeCall(userUSD, userCurrency) {
   request.onreadystatechange = function() {
     if (this.readyState === 4 && this.status === 200) {
       let apiOutput = JSON.parse(this.responseText);
-      Errors.getApiErrors(apiOutput);
-      if (Errors.getApiErrors(apiOutput) === true) {
+      if (Errors.noApiErrors(apiOutput) === true) {
         buildConversion(userCurrency, userUSD, apiOutput);
       }
     }
@@ -52,9 +51,9 @@ $(document).ready(function() {
     
     clearFields();
     
-    Errors.getMoneyErrors(userUSD);
-    Errors.getDollarErrors(userCurrency);
-    if (Errors.getDollarErrors(userCurrency) === true && Errors.getMoneyErrors(userUSD) == true) {
+    Errors.noMoneyErrors(userUSD);
+    Errors.noDollarErrors(userCurrency);
+    if (Errors.noDollarErrors(userCurrency) === true && Errors.noMoneyErrors(userUSD) == true) {
       makeCall(userUSD, userCurrency);
     }
   });
