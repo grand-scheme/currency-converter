@@ -3,25 +3,26 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/css/styles.css';
-import GetConversion from './../assets/js/conversion.js';
+// import GetConversion from './../assets/js/conversion.js';
 import Errors from '../assets/js/error-handling.js';
+import CallService from '../assets/js/call-service.js';
 
-// BUSINESS LOGIC: API CALL
-function makeCall(userCurrency, userUSD) {
-  let request = new XMLHttpRequest(userCurrency, userUSD);
-  const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
-  request.onreadystatechange = function() {
-    if (this.readyState === 4 && this.status === 200) {
-      let apiOutput = JSON.parse(this.responseText);
-      if (Errors.noApiErrors(apiOutput) === true) {
-        // return apiOutput;
-        GetConversion.getConversion(userCurrency, userUSD, apiOutput);
-      }
-    }
-  };
-  request.open("GET", url, true);
-  request.send();
-}
+// // BUSINESS LOGIC: API CALL
+// function makeCall(userCurrency, userUSD) {
+//     let request = new XMLHttpRequest();
+//     const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
+//     request.onload = function() {
+//       if (this.status === 200) {
+//       let apiOutput = JSON.parse(this.responseText);
+//       if (Errors.noApiErrors(apiOutput) === true) {
+//         // return apiOutput;
+//         GetConversion.getConversion(userCurrency, userUSD, apiOutput);
+//       }
+//     }
+//   };
+//   request.open("GET", url, true);
+//   request.send();
+// }
 
 
 
@@ -64,9 +65,10 @@ $(document).ready(function() {
     Errors.noMoneyErrors(userUSD);
     Errors.noDollarErrors(userCurrency);
     if (Errors.noDollarErrors(userCurrency) === true && Errors.noMoneyErrors(userUSD) == true) {
-      makeCall(userCurrency, userUSD);
-      // let apiOP = makeCall();
-      // buildConversion(userCurrency, userUSD, apiOP);
+      CallService.makeCall(userCurrency, userUSD);
+      // let apiOutput = makeCall();
+      // GetConversion.getConversion(userCurrency, userUSD, apiOutput);
+      // console.log
       uiConversion(userCurrency, userUSD);
     }
   });
