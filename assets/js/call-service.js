@@ -10,12 +10,13 @@ export default class CallService {
       if (this.status === 200) {
         const apiOutput = JSON.parse(this.responseText);
         if (Errors.noApiErrors(apiOutput) === true) {
-          // return apiOutput;
           GetConversion.getConversion(userCurrency, userUSD, apiOutput);
-        } 
+        } else {
+          Errors.noApiErrors(apiOutput);
+        }
       } else {
-        $("#error-output").html(`<li>Sorry! There was an error with the HTTP status  ${this.status}</li>`);
-      } 
+        $("#error-output").html(`<li>The HTTP status returned as: ${this.status}</li>`);
+      }
     };
     request.open("GET", url, true);
     request.send();
