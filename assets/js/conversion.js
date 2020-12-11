@@ -1,3 +1,4 @@
+import $ from 'jquery';
 export default class GetConversion {
   static getConversion(userCurrency, userUSD, apiOutput) {
     let currencyChosen = GetConversion.getCurrency(userCurrency);
