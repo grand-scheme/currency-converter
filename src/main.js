@@ -1,4 +1,3 @@
-// BUSINESS LOGIC: FUNCTION IMPORTS
 import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,9 +25,7 @@ $(document).ready(function() {
     e.preventDefault();
     let userUSD = parseFloat($("#usd-input").val());
     let userCurrency = $("#currency-select").val();
-    
     clearFields();
-    
     Errors.noMoneyErrors(userUSD);
     Errors.noDollarErrors(userCurrency);
     if (Errors.noDollarErrors(userCurrency) === true && Errors.noMoneyErrors(userUSD) == true) {
