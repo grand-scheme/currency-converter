@@ -1,5 +1,9 @@
+import $ from 'jquery';
+import Errors from './error-handling.js';
+import GetConversion from './conversion.js';
+
 export default class CallService {
-  static makeCall() {
+  static makeCall(userCurrency, userUSD) {
     let request = new XMLHttpRequest();
     const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
     request.onload = function() {
