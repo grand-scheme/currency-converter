@@ -1,27 +1,26 @@
 export default class GetConversion {
   static getCurrency(userCurrency) {
-    let result = "";
     let dollars = userCurrency.toUpperCase();
-    if (dollars === "AUSTRALIAN DOLLARS" || dollars === "AUD") {
-      result = "AUD";
-    } else if (dollars === "BAHAMIAN DOLLARS" || dollars === "BSD") {
-      result = "BSD";
-    } else if (dollars === "CANADIAN DOLLARS" || dollars === "CAD") {
-      result = "CAD";
-    } else if (dollars === "HONG KONG DOLLARS" || dollars === "HKD") {
-      result = "HKD";
-    } else if (dollars === "NEW ZEALAND DOLLARS" || dollars === "NZD") {
-      result = "NZD";
+    if (dollars === ("AUSTRALIAN DOLLARS" || "AUD")) {
+      dollars = "AUD";
+    } else if (dollars === ("BAHAMIAN DOLLARS" || "BSD")) {
+      dollars = "BSD";
+    } else if (dollars === ("CANADIAN DOLLARS" || "CAD")) {
+      dollars = "CAD";
+    } else if (dollars === ("HONG KONG DOLLARS" || "HKD")) {
+      dollars = "HKD";
+    } else if (dollars === ("NEW ZEALAND DOLLARS" || "NZD")) {
+      dollars = "NZD";
     } else {
-      result = null;
+      dollars = null;
     }
-    return result;
+    return dollars;
   }
 
   static getElements(response, userCurrency) {
-    let currencyObject = response.conversion_rates[userCurrency];
-    return currencyObject;
+    return response.conversion_rates[userCurrency];
   }
+
   static math(selectedExchangeRate, userUSD) {
     if (isNaN(selectedExchangeRate)) {
       return selectedExchangeRate;
