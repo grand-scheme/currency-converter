@@ -1,4 +1,11 @@
 export default class GetConversion {
+  static getConversion(userCurrency, userUSD, apiOutput) {
+    let currencyChosen = GetConversion.getCurrency(userCurrency);
+    let selectedExchangeRate = GetConversion.getElements(apiOutput, currencyChosen);
+    let currencyAfterConversion = GetConversion.math(selectedExchangeRate, userUSD);
+    $("#conversion-output").text(currencyAfterConversion);
+  }
+  
   static getCurrency(userCurrency) {
     let dollars = userCurrency.toUpperCase();
     if (dollars === "AUSTRALIAN DOLLARS" || dollars === "AUD") {
@@ -28,4 +35,6 @@ export default class GetConversion {
       return (selectedExchangeRate * userUSD).toFixed(2) ;
     }
   }
+
+  
 }

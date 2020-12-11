@@ -7,14 +7,15 @@ import GetConversion from './../assets/js/conversion.js';
 import Errors from '../assets/js/error-handling.js';
 
 // BUSINESS LOGIC: API CALL
-function makeCall(userUSD, userCurrency) {
-  let request = new XMLHttpRequest();
+function makeCall(userCurrency, userUSD) {
+  let request = new XMLHttpRequest(userCurrency, userUSD);
   const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
   request.onreadystatechange = function() {
     if (this.readyState === 4 && this.status === 200) {
       let apiOutput = JSON.parse(this.responseText);
       if (Errors.noApiErrors(apiOutput) === true) {
-        buildConversion(userCurrency, userUSD, apiOutput);        
+        // return apiOutput;
+        GetConversion.getConversion(userCurrency, userUSD, apiOutput);
       }
     }
   };
@@ -37,19 +38,14 @@ function clearFields() {
   $("#content-error").hide();
 }
 
-function buildConversion(userCurrency, userUSD, apiOutput) {
-  let currencyChosen = GetConversion.getCurrency(userCurrency);
-  let selectedExchangeRate = GetConversion.getElements(apiOutput, currencyChosen);
-  let currencyAfterConversion = GetConversion.math(selectedExchangeRate, userUSD);
-  $("#usd-output").text(userUSD.toFixed(2));
-  $("#conversion-output").text(currencyAfterConversion);
-}
 
-function uiConversion(userCurrency) {
+
+function uiConversion(userCurrency, userUSD) {
   let checkDollars = userCurrency.toUpperCase();
   if (checkDollars === "AUD" || checkDollars === "BSD" || checkDollars === "CAD" || checkDollars === "HKD" || checkDollars === "NZD") {
     $("#currency").text(checkDollars);
   } else { $("#currency").text(userCurrency); }
+  $("#usd-output").text(userUSD.toFixed(2));
   $("#content-success").show();
 }
 
@@ -68,8 +64,10 @@ $(document).ready(function() {
     Errors.noMoneyErrors(userUSD);
     Errors.noDollarErrors(userCurrency);
     if (Errors.noDollarErrors(userCurrency) === true && Errors.noMoneyErrors(userUSD) == true) {
-      makeCall(userUSD, userCurrency);
-      uiConversion(userCurrency);
+      makeCall(userCurrency, userUSD);
+      // let apiOP = makeCall();
+      // buildConversion(userCurrency, userUSD, apiOP);
+      uiConversion(userCurrency, userUSD);
     }
   });
 });
