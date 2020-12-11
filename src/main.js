@@ -3,7 +3,6 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/css/styles.css';
-import GetConversion from './../assets/js/conversion.js';
 import Errors from '../assets/js/error-handling.js';
 import CallService from '../assets/js/call-service.js';
 
@@ -33,13 +32,8 @@ $(document).ready(function() {
     Errors.noMoneyErrors(userUSD);
     Errors.noDollarErrors(userCurrency);
     if (Errors.noDollarErrors(userCurrency) === true && Errors.noMoneyErrors(userUSD) == true) {
-      const apiOutput = CallService.makeCall();
-      if (Errors.noApiErrors(apiOutput) === true) {
-        GetConversion.getConversion(userCurrency, userUSD, apiOutput);
-        uiConversion(userCurrency, userUSD);
-      } else {
-        Errors.noApiErrors(apiOutput);
-      }
+      CallService.makeCall(userCurrency, userUSD);
+      uiConversion(userCurrency, userUSD);
     }
   });
 });
