@@ -6,7 +6,31 @@ import '../assets/css/styles.css';
 import GetConversion from './../assets/js/conversion.js';
 import Errors from '../assets/js/error-handling.js';
 
-// BUSINESS LOGIC: ASSEMBLY FUNCTIONS
+// BUSINESS LOGIC: API CALL
+function makeCall(userUSD, userCurrency) {
+  let request = new XMLHttpRequest();
+  const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
+  request.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      let apiOutput = JSON.parse(this.responseText);
+      if (Errors.noApiErrors(apiOutput) === true) {
+        buildConversion(userCurrency, userUSD, apiOutput);        
+      }
+    }
+  };
+  request.open("GET", url, true);
+  request.send();
+}
+
+
+
+
+
+
+
+
+
+
 function clearFields() {
   $("#error-output").val("");
   $("#content-success").hide();
@@ -30,21 +54,7 @@ function uiConversion(userCurrency) {
 }
 
 
-// BUSINESS LOGIC: API CALL
-function makeCall(userUSD, userCurrency) {
-  let request = new XMLHttpRequest();
-  const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
-  request.onreadystatechange = function() {
-    if (this.readyState === 4 && this.status === 200) {
-      let apiOutput = JSON.parse(this.responseText);
-      if (Errors.noApiErrors(apiOutput) === true) {
-        buildConversion(userCurrency, userUSD, apiOutput);        
-      }
-    }
-  };
-  request.open("GET", url, true);
-  request.send();
-}
+
 
 // User Interface
 $(document).ready(function() {
