@@ -19,12 +19,16 @@ function buildConversion(userCurrency, userUSD, apiOutput) {
   let currencyAfterConversion = GetConversion.math(selectedExchangeRate, userUSD);
   $("#usd-output").text(userUSD.toFixed(2));
   $("#conversion-output").text(currencyAfterConversion);
+}
+
+function uiConversion(userCurrency) {
   let checkDollars = userCurrency.toUpperCase();
   if (checkDollars === "AUD" || checkDollars === "BSD" || checkDollars === "CAD" || checkDollars === "HKD" || checkDollars === "NZD") {
     $("#currency").text(checkDollars);
   } else { $("#currency").text(userCurrency); }
   $("#content-success").show();
 }
+
 
 // BUSINESS LOGIC: API CALL
 function makeCall(userUSD, userCurrency) {
@@ -34,7 +38,7 @@ function makeCall(userUSD, userCurrency) {
     if (this.readyState === 4 && this.status === 200) {
       let apiOutput = JSON.parse(this.responseText);
       if (Errors.noApiErrors(apiOutput) === true) {
-        buildConversion(userCurrency, userUSD, apiOutput);
+        buildConversion(userCurrency, userUSD, apiOutput);        
       }
     }
   };
@@ -55,6 +59,7 @@ $(document).ready(function() {
     Errors.noDollarErrors(userCurrency);
     if (Errors.noDollarErrors(userCurrency) === true && Errors.noMoneyErrors(userUSD) == true) {
       makeCall(userUSD, userCurrency);
+      uiConversion(userCurrency);
     }
   });
 });
