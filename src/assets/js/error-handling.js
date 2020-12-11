@@ -1,6 +1,4 @@
 import $ from 'jquery';
-import 'bootstrap';
-import '../css/styles.css';
 
 export default class Errors {
   static noMoneyErrors(usd) {
@@ -64,6 +62,5 @@ export default class Errors {
       $("#content-error").show();
       $("#error-output").html("<li>Something broke along the way.</li>");
     }
-    
   }
 }

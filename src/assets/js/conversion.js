@@ -33,9 +33,7 @@ export default class GetConversion {
     if (isNaN(userUSD)) {
       return "Did you input your currency in numbers?";
     } else {
-      return (selectedExchangeRate * userUSD).toFixed(2) ;
+      return (selectedExchangeRate * userUSD).toFixed(2);
     }
   }
-
-  
 }

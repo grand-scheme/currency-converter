@@ -2,10 +2,9 @@
 import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../assets/css/styles.css';
-import GetConversion from './../assets/js/conversion.js';
-import Errors from '../assets/js/error-handling.js';
-import CallService from '../assets/js/call-service.js';
+import './assets/css/styles.css';
+import Errors from './assets/js/error-handling.js';
+import CallService from './assets/js/call-service.js';
 
 function clearFields() {
   $("#error-output").val("");
@@ -33,17 +32,8 @@ $(document).ready(function() {
     Errors.noMoneyErrors(userUSD);
     Errors.noDollarErrors(userCurrency);
     if (Errors.noDollarErrors(userCurrency) === true && Errors.noMoneyErrors(userUSD) == true) {
-      let promise = CallService.makeCall();
-      promise.then(function() {
-        if (CallService.makeCall() === false) {
-          $("#error-output").html(`<li>Sorry! There was an error with the HTTP status. ${this.status}</li>`);
-        } else {
-          console.log(CallService.makeCall());
-          let apiOutput = CallService.makeCall();
-          GetConversion.getConversion(userCurrency, userUSD, apiOutput);
-          uiConversion(userCurrency, userUSD);
-        }
-      });
+      CallService.makeCall(userCurrency, userUSD);
+      uiConversion(userCurrency, userUSD);
     }
   });
 });
