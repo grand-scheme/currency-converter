@@ -1,15 +1,15 @@
 export default class GetConversion {
   static getCurrency(userCurrency) {
     let dollars = userCurrency.toUpperCase();
-    if (dollars === ("AUSTRALIAN DOLLARS" || "AUD")) {
+    if (dollars === "AUSTRALIAN DOLLARS" || dollars === "AUD") {
       dollars = "AUD";
-    } else if (dollars === ("BAHAMIAN DOLLARS" || "BSD")) {
+    } else if (dollars === "BAHAMIAN DOLLARS" || dollars === "BSD") {
       dollars = "BSD";
-    } else if (dollars === ("CANADIAN DOLLARS" || "CAD")) {
+    } else if (dollars === "CANADIAN DOLLARS" || dollars === "CAD") {
       dollars = "CAD";
-    } else if (dollars === ("HONG KONG DOLLARS" || "HKD")) {
+    } else if (dollars === "HONG KONG DOLLARS" || dollars === "HKD") {
       dollars = "HKD";
-    } else if (dollars === ("NEW ZEALAND DOLLARS" || "NZD")) {
+    } else if (dollars === "NEW ZEALAND DOLLARS" || dollars === "NZD") {
       dollars = "NZD";
     } else {
       dollars = null;
@@ -22,12 +22,10 @@ export default class GetConversion {
   }
 
   static math(selectedExchangeRate, userUSD) {
-    if (isNaN(selectedExchangeRate)) {
-      return selectedExchangeRate;
-    } else if (isNaN(userUSD)) {
+    if (isNaN(userUSD)) {
       return "Did you input your currency in numbers?";
     } else {
-      return (selectedExchangeRate * userUSD).toFixed(2);
+      return (selectedExchangeRate * userUSD).toFixed(2) ;
     }
   }
 }
